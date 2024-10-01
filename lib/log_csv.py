@@ -17,7 +17,8 @@ class LogLine:
         with open (result_file, mode='a', newline='', encoding='utf-8') as file:
             writer = csv.writer(file)
             writer.writerow([f"Trigger: {trigger_per_minute} times"])
-            writer.writerow([f"Time between tasks: {time_between_task*4}"])
+            writer.writerow([f"Time between tasks: {time_between_task}"])
+            # writer.writerow([f"Time between tasks: {time_between_task*4}"])
             writer.writerow([f"Current column: {invocation_column}"])
             writer.writerow(["Time between tasks updated"])
             
@@ -29,7 +30,8 @@ class LogLine:
         with open (result_file, mode = 'a', newline='', encoding='utf-8') as file:
             writer = csv.writer(file)
             writer.writerow([f"Trigger: Remaining {trigger_per_minute} times"])
-            writer.writerow([f"Time between tasks: {time_between_task*4}"])
+            # writer.writerow([f"Time between tasks: {time_between_task*4}"])
+            writer.writerow([f"Time between tasks: {time_between_task}"])
             writer.writerow([f"Current column: {invocations_column}"])
             writer.writerow(["Time between tasks NOT updated"])
             
@@ -94,9 +96,11 @@ class ReadCSV:
         Get time between tasks based on trigger per minute
         """
         if trigger_per_minute == 0:
-            time_between_task = step_time/2
+            # time_between_task = step_time/2
+            time_between_task = step_time * 2
         else:
-            time_between_task = step_time/trigger_per_minute/4
+            # time_between_task = step_time/trigger_per_minute/4
+            time_between_task = step_time/trigger_per_minute
             
         return time_between_task
     
