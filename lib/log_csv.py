@@ -18,7 +18,6 @@ class LogLine:
             writer = csv.writer(file)
             writer.writerow([f"Trigger: {trigger_per_minute} times"])
             writer.writerow([f"Time between tasks: {time_between_task}"])
-            # writer.writerow([f"Time between tasks: {time_between_task*4}"])
             writer.writerow([f"Current column: {invocation_column}"])
             writer.writerow(["Time between tasks updated"])
             
@@ -97,7 +96,7 @@ class ReadCSV:
         """
         if trigger_per_minute == 0:
             # time_between_task = step_time/2
-            time_between_task = step_time * 2
+            time_between_task = step_time
         else:
             # time_between_task = step_time/trigger_per_minute/4
             time_between_task = step_time/trigger_per_minute

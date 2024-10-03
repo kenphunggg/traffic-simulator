@@ -9,7 +9,6 @@ class AnalyzeData:
         """
         Analyzing response data from a HTTP request GET
         """
-        
         response_body = response.text.strip()
         lines = response_body.split('\n')
         

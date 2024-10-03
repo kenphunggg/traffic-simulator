@@ -1,5 +1,5 @@
 """
-Module for analysing data
+Generate data from percentile csv file
 """
 import csv
 import numpy as np
