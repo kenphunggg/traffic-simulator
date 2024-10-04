@@ -26,6 +26,7 @@ pip install numpy
 
 Let's take a look at `multi_user.py`, adjust the variable below
 `TEST_CASE` and `RESULT_FILE` are the subfile location of `result_file` in your repository and your file name, respectively
+
 `INVOCATION_FILE_LOCATION`, `DURATION_FILE_LOCATION`, `MEMORY_FILE_LOCATION` are three .csv file location that we take from AzureDataTrace, which give us all information to simulate the traffic
 
 ```python
