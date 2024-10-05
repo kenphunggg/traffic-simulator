@@ -106,7 +106,6 @@ class User(HttpUser):
 
             # Adjust line count for csv file
             User.result_line_count += 1
-            LogLine.get_app_id(self.app_id, RESULT_FILE_LOCATION)
 
     def wait_time(self):
         """Define own wait time"""
