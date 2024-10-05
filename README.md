@@ -1,4 +1,4 @@
-# Simulating traffic based on an Azure Datatrace using Locust
+# Simulating traffic based on an Azure Functions Trace using Locust
 
 ## Installation
 
@@ -21,6 +21,10 @@ Then install locust and other dependencies on your virtual environment
 pip install locust
 pip install numpy
 ```
+
+## Download datatrace
+
+The data we use for simulating are taken from [Azure Functions Trace](https://github.com/Azure/AzurePublicDataset/blob/master/AzureFunctionsDataset2019.md)
 
 ## Set up variables
 
