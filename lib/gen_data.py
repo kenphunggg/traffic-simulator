@@ -33,7 +33,7 @@ class GenerateData:
         count_pct75 = int(sample_count * (0.75 - 0.50))     # 75% below pct75
         count_pct95 = int(sample_count * (0.95 - 0.75))     # 95% below pct95
         count_pct99 = int(sample_count * (0.99 - 0.95))     # 99% below pct99
-        count_pct100 = sample_count - (count_pct1 + count_pct5 + count_pct25 + count_pct50 + count_pct75 + count_pct95 + count_pct99)
+        count_pct100 = int(sample_count * 0.01)
 
         # Generate random data for each percentile
         data_pct1 = np.random.uniform(0, pct1, count_pct1)               # Uniform between 0 and pct1
@@ -76,7 +76,7 @@ class GenerateData:
         count_pct50 = int(count * (0.50 - 0.25))          # 50% below pct50
         count_pct75 = int(count * (0.75 - 0.50))          # 75% below pct75
         count_pct99 = int(count * (0.99 - 0.75))          # 99% below pct99
-        count_pct100 = count - (count_pct1 + count_pct25 + count_pct50 + count_pct75 + count_pct99)  # Remaining to pct100
+        count_pct100 = int(count * 0.01)  # Remaining to pct100
 
         # Generate random data for each percentile using uniform distribution
         data_min = np.random.uniform(min_value, min_value, 1)
