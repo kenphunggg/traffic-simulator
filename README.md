@@ -18,8 +18,7 @@ source traffic-simulator-venv/bin/activate
 Then install locust and other dependencies on your virtual environment
 
 ```bash
-pip install locust
-pip install numpy
+pip install requirements.txt
 ```
 
 The app use to simulate the functions are taken from [workload-app](https://github.com/bonavadeur/workload-app)
@@ -54,21 +53,30 @@ STEP_TIME = 4
 ########################################
 ```
 
-## Generate the file for running
-
-I have trouble creating more than one user which follow the datatrace's rule, so i use `gen_code.py` clone the Class `User` for me and save in `NEW_FILE`
-
-```bash
-USER_COUNT = 5
-NEW_FILE = genfile
-python3 gencode.py $NEW_FILE $USER_COUNT
-```
-
 ## Running the test
 
+### Reset setup
+
+Before running the test, run `del.sh` to reset (if you have run the test before)
+
 ```bash
-SPAWN_RATE = 100 # Users/second
-locust -f genfile.py --headless -u $USER_COUNT -r $SPAWN_RATE
+chmod +x del.sh
+./del.sh
+```
+
+### Setup
+
+Setup the containers for testing
+
+```bash
+chmod +x run.sh
+export USER_COUNT = 50   # Specify the number of user
+./run.sh $USER_COUNT
+```
+
+### Run the test
+```bash
+locust -f runtest.py --headless -u $USER_COUNT -r $USER_COUNT 
 ```
 
 

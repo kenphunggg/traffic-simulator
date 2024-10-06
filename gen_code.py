@@ -15,8 +15,9 @@ def main(file_name, user_count):
   with open(f'{file_name}.py', 'a', encoding='utf-8') as file:
       for i in range(3, user_count+1):
           class_definition = f'''
-class User{i}(User):
+class User{i}(User1):
     """Define User to execute AdvanceCurlTask"""
+    host = 'http://localhost:2800{i}/mem.php'
     def __init__(self, parent):
         super().__init__(parent)
         self.desire_row = {i}

@@ -31,11 +31,11 @@ STEP_TIME = 4
 
 ########################################
 
-class User(HttpUser):
+class User1(HttpUser):
     """Define User to execute Task"""
     result_line_count = 1  # It can only change by first user cuz i do not know how to do it another way
     init = 1
-    host = 'http://localhost:28080/mem.php'
+    host = 'http://localhost:28001/mem.php'
 
     def __init__(self, parent):
         super().__init__(parent)
@@ -59,9 +59,9 @@ class User(HttpUser):
         Taskset for curl the http
         """
         # UPDATE TIME BETWEEN TASKS
-        if User.init == 1:
+        if User1.init == 1:
             LogLine.header(RESULT_FILE_LOCATION)
-            User.init -= 1
+            User1.init -= 1
 
         # GENERATE INITIAL DATA
         if self.init == 1:
@@ -96,7 +96,7 @@ class User(HttpUser):
             with open (f'{RESULT_FILE_LOCATION}', mode = 'a', newline='', encoding='utf-8') as file:
                 writer = csv.writer(file)
                 writer.writerow([
-                    User.result_line_count,
+                    User1.result_line_count,
                     Analyze.get_response(response, "input_execution_time"),
                     Analyze.get_response(response, "input_ram_usage"),
                     Analyze.get_response(response, "response_time"),
@@ -105,7 +105,7 @@ class User(HttpUser):
                     ])
 
             # Adjust line count for csv file
-            User.result_line_count += 1
+            User1.result_line_count += 1
 
     def wait_time(self):
         """Define own wait time"""
@@ -127,8 +127,9 @@ def on_init():
     """Execute on initiation"""
     os.system(f'touch {RESULT_FILE_LOCATION}')
 
-class User2(User):
+class User2(User1):
     """Define User to execute user_behavior"""
+    host = 'http://localhost:28002/mem.php'
     def __init__(self, parent):
         super().__init__(parent)
         self.desire_row = 2
