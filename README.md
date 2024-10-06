@@ -70,7 +70,7 @@ Setup the containers for testing
 
 ```bash
 chmod +x run.sh
-export USER_COUNT = 50   # Specify the number of user
+export USER_COUNT=50   # Specify the number of user
 ./run.sh $USER_COUNT
 ```
 
