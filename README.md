@@ -22,6 +22,8 @@ pip install locust
 pip install numpy
 ```
 
+The app use to simulate the functions are taken from [workload-app](https://github.com/bonavadeur/workload-app)
+
 ## Download datatrace
 
 The data we use for simulating are taken from [Azure Functions Trace](https://github.com/Azure/AzurePublicDataset/blob/master/AzureFunctionsDataset2019.md)
