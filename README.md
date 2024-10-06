@@ -18,7 +18,7 @@ source traffic-simulator-venv/bin/activate
 Then install locust and other dependencies on your virtual environment
 
 ```bash
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 
 The app use to simulate the functions are taken from [workload-app](https://github.com/bonavadeur/workload-app)
