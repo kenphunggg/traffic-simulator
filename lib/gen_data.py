@@ -70,7 +70,7 @@ class GenerateData:
                     max_value = float(row[6])
                     break
                 
-        count = count - 2
+        # count = count - 2
         count_pct1 = int(count * 0.01)                    # 5% below pct1
         count_pct25 = int(count * (0.25 - 0.01))          # 25% below pct25
         count_pct50 = int(count * (0.50 - 0.25))          # 50% below pct50

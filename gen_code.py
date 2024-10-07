@@ -6,23 +6,23 @@ import os
 from lib.ColorfulMessage import Message as Msg
 
 def main(file_name, user_count):
-  """
-  Generate class
-  """
+    """
+    Generate class
+    """
+    os.system(f'cp multi_user.py {file_name}.py')
 
-  os.system(f'cp multi_user.py {file_name}.py')
-
-  with open(f'{file_name}.py', 'a', encoding='utf-8') as file:
-      for i in range(3, user_count+1):
-          class_definition = f'''
+    with open(f'{file_name}.py', 'a', encoding='utf-8') as file:
+        for i in range(3, user_count+1):
+            port = 28000 + i
+            class_definition = f'''
 class User{i}(User1):
     """Define User to execute AdvanceCurlTask"""
-    host = 'http://localhost:2800{i}/mem.php'
+    host = 'http://localhost:{port}/mem.php'
     def __init__(self, parent):
         super().__init__(parent)
-        self.desire_row = {i}
+        self.desire_app_count = {i}
     '''
-          file.write(class_definition)
+            file.write(class_definition)
 
 if __name__ == '__main__':
      # Check if '--help' argument is passed

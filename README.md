@@ -42,13 +42,13 @@ RESULT_FILE = 'test'
 
 ############ FILE LOCATION #############
 
-INVOCATION_FILE_LOCATION = '../azure-sampleData/invocations/invocations_per_function_md.anon.d01.csv'
-DURATION_FILE_LOCATION = '../azure-sampleData/function_durations/function_durations_percentiles.anon.d01.csv'
-MEMORY_FILE_LOCATION = '../azure-sampleData/app_memory/app_memory_percentiles.anon.d01.csv'
+INVOCATION_FILE_LOCATION = '../azure-datatrace/invocations/invocations_per_function_md.anon.d01.csv'
+DURATION_FILE_LOCATION = '../azure-datatrace/function_durations/function_durations_percentiles.anon.d01.csv'
+MEMORY_FILE_LOCATION = '../azure-datatrace/app_memory/app_memory_percentiles.anon.d01.csv'
 
 ###### SET UP BASED ON DATATRACE ######
 
-STEP_TIME = 4
+STEP_TIME = 60
 
 ########################################
 ```
