@@ -9,7 +9,7 @@ from locust import (HttpUser,
                     events
                     )
 import numpy as np
-from lib.log_csv import (LogLine, 
+from lib.log_csv import (LogLine,
                          GetData,
                          AnalyzeData as Analyze)
 from lib.gen_data import GenerateData
@@ -86,7 +86,7 @@ class User1(HttpUser):
             self.memory_usage_data = np.delete(self.memory_usage_data, 0)
             
             # SEND REQUEST
-            response = self.client.request(
+            self.client.request(
                 method='POST',
                 url='',
                 headers={
@@ -95,21 +95,11 @@ class User1(HttpUser):
                 data={
                     'value': self.execution_time,
                     'memory': self.memory_usage
+                },
+                context={
+                    'app_id': self.app_id
                 }
             )
-            
-            # GET RESPONSE VALUE
-            with open (f'{RESULT_FILE_LOCATION}', mode = 'a', newline='', encoding='utf-8') as file:
-                writer = csv.writer(file)
-                writer.writerow([
-                    User1.result_line_count,
-                    Analyze.get_response(response, "input_execution_time"),
-                    Analyze.get_response(response, "input_ram_usage"),
-                    Analyze.get_response(response, "response_time"),
-                    Analyze.get_response(response, "real_ram_usage"),
-                    Analyze.get_response(response, "formatted_time"),
-                    self.app_id
-                    ])
 
             # Adjust line count for csv file
             User1.result_line_count += 1
@@ -139,6 +129,23 @@ class User1(HttpUser):
 def on_init():
     """Execute on initiation"""
     os.system(f'touch {RESULT_FILE_LOCATION}')
+    
+@events.request.add_listener
+def catch_response(response, context, **kwargs):
+    """
+    Catch response
+    """
+    with open (f'{RESULT_FILE_LOCATION}', mode = 'a', newline='', encoding='utf-8') as file:
+            writer = csv.writer(file)
+            writer.writerow([
+                User1.result_line_count,
+                Analyze.get_response(response, "input_execution_time"),
+                Analyze.get_response(response, "input_ram_usage"),
+                Analyze.get_response(response, "response_time"),
+                Analyze.get_response(response, "real_ram_usage"),
+                Analyze.get_response(response, "formatted_time"),
+                context['app_id']
+                ])
 
 class User2(User1):
     """Define User to execute user_behavior"""

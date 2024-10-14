@@ -153,12 +153,6 @@ class GetData:
             time_between_task = step_time
         else:
             time_between_task = step_time/trigger_per_minute
-            
-        if execution_time is not None:
-            if time_between_task > execution_time:
-                time_between_task -= execution_time
-            else:
-                time_between_task = 0
         
         return time_between_task
             
