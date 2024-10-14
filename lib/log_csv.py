@@ -145,7 +145,7 @@ class GetData:
         return trigger_per_minute
     
     @staticmethod
-    def time_between_task(trigger_per_minute, step_time):
+    def time_between_task(trigger_per_minute, step_time, execution_time):
         """
         Get time between tasks based on trigger per minute
         """
@@ -154,6 +154,12 @@ class GetData:
         else:
             time_between_task = step_time/trigger_per_minute
             
+        if execution_time is not None:
+            if time_between_task > execution_time:
+                time_between_task -= execution_time
+            else:
+                time_between_task = 0
+        
         return time_between_task
             
             
@@ -198,15 +204,19 @@ class AnalyzeData:
     
     
 if __name__ == "__main__":
-    PARENT_FILE_LOCATION = 'azure-sampleData'
-    CHILD_FILE_LOCATION = 'invocations'
-    FILE_LOCATION = 'invocations_per_function_md.anon.d01.csv'
-    app_id_test = GetData.app_id(desire_app_count=3,
-                              file=f'../../{PARENT_FILE_LOCATION}/{CHILD_FILE_LOCATION}/{FILE_LOCATION}')
-    print(app_id_test)
-    tpm_test = GetData.trigger_per_minute(app_id=app_id_test,
-                                          column=4,
-                                          file=f'../../{PARENT_FILE_LOCATION}/{CHILD_FILE_LOCATION}/{FILE_LOCATION}')
-    print(tpm_test)
+    # PARENT_FILE_LOCATION = 'azure-sampleData'
+    # CHILD_FILE_LOCATION = 'invocations'
+    # FILE_LOCATION = 'invocations_per_function_md.anon.d01.csv'
+    # app_id_test = GetData.app_id(desire_app_count=3,
+    #                           file=f'../../{PARENT_FILE_LOCATION}/{CHILD_FILE_LOCATION}/{FILE_LOCATION}')
+    # print(app_id_test)
+    # tpm_test = GetData.trigger_per_minute(app_id=app_id_test,
+    #                                       column=4,
+    #                                       file=f'../../{PARENT_FILE_LOCATION}/{CHILD_FILE_LOCATION}/{FILE_LOCATION}')
+    # print(tpm_test)
+    
+    data = GetData.time_between_task(trigger_per_minute=4, step_time=20, execution_time=None)
+    
+    print(f'time between tasks equal {data} second')
     
     

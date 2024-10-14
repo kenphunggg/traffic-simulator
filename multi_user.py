@@ -126,7 +126,9 @@ class User1(HttpUser):
                                                                  column=self.invocations_column,
                                                                  file=INVOCATION_FILE_LOCATION)
             
-            self.time_between_task = GetData.time_between_task(self.trigger_per_minute, STEP_TIME)
+            self.time_between_task = GetData.time_between_task(trigger_per_minute=self.trigger_per_minute,
+                                                               step_time=STEP_TIME,
+                                                               execution_time=self.execution_time)
             
             self.start_time = current_time
             self.invocations_column += 1
