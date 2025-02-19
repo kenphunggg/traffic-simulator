@@ -37,7 +37,7 @@ class User1(HttpUser):
     """Define User to execute Task"""
     result_line_count = 1  # It can only change by first user cuz i do not know how to do it another way
     init = 1
-    host = 'http://localhost:28001/mem.php'
+    host = 'http://hello.default.svc.cluster.local'
 
     def __init__(self, parent):
         super().__init__(parent)
@@ -52,11 +52,11 @@ class User1(HttpUser):
         self.time_between_task = float(0)
         self.invocations_column = 4
         # For Execution time
-        self.execution_time = None
-        self.execution_time_data = []
+        # self.execution_time = None
+        # self.execution_time_data = []
         # For Memory usage
-        self.memory_usage = None
-        self.memory_usage_data = []
+        # self.memory_usage = None
+        # self.memory_usage_data = []
 
     @task
     def user_behavior(self):
@@ -71,8 +71,8 @@ class User1(HttpUser):
         if self.init == 1:
             self.app_id = GetData.app_id(desire_app_count=self.desire_app_count,
                                          file=INVOCATION_FILE_LOCATION)
-            self.execution_time_data = GenerateData.durations_data(self.app_id, DURATION_FILE_LOCATION)
-            self.memory_usage_data = GenerateData.memory_data(self.app_id, MEMORY_FILE_LOCATION)
+            # self.execution_time_data = GenerateData.durations_data(self.app_id, DURATION_FILE_LOCATION)
+            # self.memory_usage_data = GenerateData.memory_data(self.app_id, MEMORY_FILE_LOCATION)
             self.init -= 1
         
         if self.trigger_per_minute != 0:
@@ -149,7 +149,7 @@ def catch_response(response, context, **kwargs):
 
 class User2(User1):
     """Define User to execute user_behavior"""
-    host = 'http://localhost:28002/mem.php'
+    host = 'ttp://hello.default.svc.cluster.local'
     def __init__(self, parent):
         super().__init__(parent)
         self.desire_app_count = 2

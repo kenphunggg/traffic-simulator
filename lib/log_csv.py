@@ -86,7 +86,7 @@ class FromTriggerRow:
                     if row_count < desired_row:
                         row_count += 1
                     elif row_count == desired_row:
-                        app_id = row[1]
+                        app_id = row[0]
                         break
                         
         return app_id
