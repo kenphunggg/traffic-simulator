@@ -7,7 +7,7 @@ num_requests = 10  # Number of requests (rows)
 num_samples_per_request = 300  # Number of samples per request (columns)
 
 # Open the CSV file for writing
-with open('poisson_data.csv', mode='w', newline='') as file:
+with open('poisson_distribution.csv', mode='w', newline='') as file:
     writer = csv.writer(file)
     
     # Write the header row (optional)
@@ -20,4 +20,4 @@ with open('poisson_data.csv', mode='w', newline='') as file:
         row = [i] + data.tolist()
         writer.writerow(row)
 
-print("Data has been written to poisson_data.csv")
+print("Data has been written to poisson_distribution.csv")

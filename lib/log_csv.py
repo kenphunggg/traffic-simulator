@@ -195,6 +195,22 @@ class AnalyzeData:
             return result.get(key, f"Key '{key}' not found")
         else:
             return result
+        
+    @staticmethod
+    def get_simple_response(response, key=None):
+        response_body = response.text.strip()
+        response_time = response.elapsed.total_seconds()
+        response_time = response_time*1000
+        
+        result={
+            "response_body": response_body,
+            "response_time": response_time
+        }
+        
+        if key:
+            return result.get(key, f"Key '{key}' not found")
+        else:
+            return result
     
     
 if __name__ == "__main__":
