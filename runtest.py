@@ -17,7 +17,7 @@ from lib.gen_data import GenerateData
 
 ########## RESULT CONFIG ##############
 
-TEST_CASE = 'lamda5'
+TEST_CASE = 'lamda_5'
 RESULT_FILE = 'test'
 
 ############ FILE LOCATION #############
