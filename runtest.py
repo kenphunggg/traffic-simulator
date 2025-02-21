@@ -30,7 +30,7 @@ MEMORY_FILE_LOCATION = '../azure-sampleData/app_memory/app_memory_percentiles.an
 
 ###### SET UP BASED ON DATATRACE ######
 
-STEP_TIME = 5
+STEP_TIME = 10
 
 ########################################
 
