@@ -63,10 +63,9 @@ class LogLine:
             writer = csv.writer(file)
             writer.writerow([
                 "Line count", 
-                "Input execution time(ms)", 
-                "Input ram usage(MB)", 
-                "Response time",
-                "Real ram usage"
+                "Response time", 
+                "current time", 
+                "app id"
                 ])
     
 class FromTriggerRow:
@@ -202,9 +201,15 @@ class AnalyzeData:
         response_time = response.elapsed.total_seconds()
         response_time = response_time*1000
         
+        # Getting current local time
+        current_time = time()
+        local_time = localtime(current_time)
+        formatted_time = strftime("%H:%M:%S", local_time)
+        
         result={
             "response_body": response_body,
-            "response_time": response_time
+            "response_time": response_time,
+            "current_time": formatted_time
         }
         
         if key:

@@ -48,7 +48,7 @@ MEMORY_FILE_LOCATION = '../azure-datatrace/app_memory/app_memory_percentiles.ano
 
 ###### SET UP BASED ON DATATRACE ######
 
-STEP_TIME = 60
+STEP_TIME = 1
 
 ########################################
 ```

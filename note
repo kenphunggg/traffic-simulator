@@ -1,0 +1,3 @@
+locust -f runtest.py --master --headless -u 11 -r 11 --expect-workers 3
+
+locust -f - --worker --master-host 192.168.218.161

@@ -17,7 +17,7 @@ from lib.gen_data import GenerateData
 
 ########## RESULT CONFIG ##############
 
-TEST_CASE = 'test_case'
+TEST_CASE = 'lamda_5'
 RESULT_FILE = 'test'
 
 ############ FILE LOCATION #############
@@ -25,12 +25,12 @@ RESULT_FILE = 'test'
 RESULT_FILE_LOCATION = f'result_file/{TEST_CASE}/{RESULT_FILE}.csv'
 INVOCATION_FILE_LOCATION = 'poisson_distribution.csv'
 # INVOCATION_FILE_LOCATION = '../azure-sampleData/invocations/invocations_per_function_md.anon.d01.csv'
-DURATION_FILE_LOCATION = '../azure-sampleData/function_durations/function_durations_percentiles.anon.d01.csv'
-MEMORY_FILE_LOCATION = '../azure-sampleData/app_memory/app_memory_percentiles.anon.d01.csv'
+# DURATION_FILE_LOCATION = '../azure-sampleData/function_durations/function_durations_percentiles.anon.d01.csv'
+# MEMORY_FILE_LOCATION = '../azure-sampleData/app_memory/app_memory_percentiles.anon.d01.csv'
 
 ###### SET UP BASED ON DATATRACE ######
 
-STEP_TIME = 1
+STEP_TIME = 5
 
 ########################################
 
@@ -52,12 +52,6 @@ class User1(HttpUser):
         self.trigger_per_minute = 0
         self.time_between_task = float(0)
         self.invocations_column = 1
-        # For Execution time
-        # self.execution_time = None
-        # self.execution_time_data = []
-        # For Memory usage
-        # self.memory_usage = None
-        # self.memory_usage_data = []
 
     @task
     def user_behavior(self):
@@ -72,8 +66,6 @@ class User1(HttpUser):
         if self.init == 1:
             self.app_id = GetData.app_id(desire_app_count=self.desire_app_count,
                                          file=INVOCATION_FILE_LOCATION)
-            # self.execution_time_data = GenerateData.durations_data(self.app_id, DURATION_FILE_LOCATION)
-            # self.memory_usage_data = GenerateData.memory_data(self.app_id, MEMORY_FILE_LOCATION)
             self.init -= 1
         
         if self.trigger_per_minute != 0:
@@ -154,7 +146,8 @@ def catch_response(response, context, **kwargs):
                 # Analyze.get_response(response, "real_ram_usage"),
                 # Analyze.get_response(response, "formatted_time"),
                 Analyze.get_simple_response(response, "response_time"),
-                Analyze.get_simple_response(response, "response_body"),
+                Analyze.get_simple_response(response, "current_time"),
+                # Analyze.get_simple_response(response, "response_body"),
                 context['app_id']
                 ])
 
@@ -164,4 +157,12 @@ class User2(User1):
     def __init__(self, parent):
         super().__init__(parent)
         self.desire_app_count = 2
+        
+
+class User3(User1):
+    """Define User to execute user_behavior"""
+    host = 'http://hello.default.svc.cluster.local'
+    def __init__(self, parent):
+        super().__init__(parent)
+        self.desire_app_count = 3
     
